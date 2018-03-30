@@ -6,12 +6,17 @@ import {
    ToastController
 
    } from 'ionic-angular';
+import {FirebaseListObservable,AngularFireDatabase} from 'angularfire2/database';
+
 
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html'
 })
 export class SignupPage {
+
+  loginCredentials :FirebaseListObservable<any[]>;
+
 
   setRadioButton = [
     {typeButton: 'radio',labelName: 'General Manager',getValue: 'generalmanager',checked: true},
@@ -21,13 +26,21 @@ export class SignupPage {
 
   ]
 
-  constructor(public alertCtrl :AlertController,public toastCtrl: ToastController)
+  constructor(
+    public alertCtrl :AlertController,
+    public toastCtrl: ToastController,
+    public firebasedb: AngularFireDatabase
+  )
   {
+    this.loginCredentials = this.firebasedb.list('/userDetails/');
 
   }
 
-  signupCredentials(username)
+  signupCredentials(username :string,email :string,password :string,confirmPassword :string,mobile :number)
   {
+
+    console.log(username,email,password,confirmPassword);
+   
     const alert = this.alertCtrl.create();
     alert.setTitle('Choose the Authorisation');
 
@@ -46,19 +59,33 @@ export class SignupPage {
     alert.addButton({
       text: 'OK',
       handler: data => {
-        // this.testRadioOpen = false;
-        // this.testRadioResult = data;
-        // console.log(data);
+
         const toast = this.toastCtrl.create({
           message: 'Thank you' + username + 'for signing up as '+ data,
           duration: 2000
         });
         toast.present();
 
+        this.loginCredentials.push({
+          username: username,
+          email: email,
+          authority: data,
+        });
+
       }
     });
     alert.present();
+
+    //storing it to the firebase variables 
+   
   }
+
+
+
+
+  
+  
+  
 
   
 }

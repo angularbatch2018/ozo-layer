@@ -25,28 +25,33 @@
                     <ion-label floating>
                       <ion-icon name="mail"></ion-icon>
                       Email</ion-label>
-                    <ion-input type="text"></ion-input>
+                    <ion-input  #emailId type="text"></ion-input>
                   </ion-item>
-                
+                  <ion-item>
+                    <ion-label floating>
+                        <ion-icon name="key"></ion-icon>
+                        Mobile No</ion-label>
+                    <ion-input  #mobileNo type="number"></ion-input>
+                  </ion-item>
 
               
                 <ion-item>
                   <ion-label floating>
                       <ion-icon name="key"></ion-icon>
                       Password</ion-label>
-                  <ion-input type="password"></ion-input>
+                  <ion-input  #password type="password"></ion-input>
                 </ion-item>
 
                 <ion-item>
                     <ion-label floating>
                         <ion-icon name="key"></ion-icon>
                         Confirm Password</ion-label>
-                    <ion-input type="password"></ion-input>
+                    <ion-input #confirmPassword type="password"></ion-input>
                   </ion-item>
             </ion-list>
             <br><br>
         </ion-card-content>
-        <button ion-button outline (click)="signupCredentials(username.value)">SIGNUP </button>
+        <button ion-button outline (click)="signupCredentials(username.value,emailId.value,password.value,confirmPassword.value,mobileNo.value)">SIGNUP </button>
         
       </ion-card>
 </ion-content>

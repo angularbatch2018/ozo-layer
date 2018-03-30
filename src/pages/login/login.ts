@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { LoginCredentialsProvider } from '../../providers/login-credentials/login-credentials';
+
+
+ 
+
+
+
 
 @Component({
   selector: 'page-login',
@@ -9,19 +14,30 @@ import { LoginCredentialsProvider } from '../../providers/login-credentials/logi
 export class LoginPage {
 
 
+
+
+  
+
+
   constructor(
     public navCtrl: NavController,
-
+   
+    
   ) {
 
+   
+       
   }
 
-
+  
   loginCreate(username)
   {
-    console.log(username);
+
+    
   
 
   }
+
+  
 
 }

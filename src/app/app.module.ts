@@ -7,8 +7,22 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
-import { LoginCredentialsProvider } from '../providers/login-credentials/login-credentials';
-import { HttpClientModule } from '@angular/common/http';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {HttpModule} from '@angular/http';
+import {AngularFireModule} from 'angularfire2';
+import { FirebaseServiceProvider } from '../providers/firebase-service/firebase-service';
+import {HttpClientModule} from '@angular/common/http';
+
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAZRBnYJEDeZJaLWdCfDQonlYYYX2_6Bh4",
+  authDomain: "ozo-order.firebaseapp.com",
+  databaseURL: "https://ozo-order.firebaseio.com",
+  projectId: "ozo-order",
+  storageBucket: "ozo-order.appspot.com",
+  messagingSenderId: "628604824573"
+};
 
 
 @NgModule({
@@ -20,6 +34,10 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    HttpModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -31,7 +49,7 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    LoginCredentialsProvider
+    FirebaseServiceProvider
   ]
 })
 export class AppModule {}
